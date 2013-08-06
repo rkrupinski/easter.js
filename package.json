@@ -1,0 +1,20 @@
+{
+  "name": "easter.js",
+  "version": "0.0.0",
+  "description": "Easter eggs made easy.",
+  "main": "easter.min.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rkrupinski/easter.js.git"
+  },
+  "author": "Rafał Krupiński",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-jshint": "~0.6.2"
+  }
+}
