@@ -56,10 +56,14 @@
 
 				}
 
-				window.addEventListener('keyup', wrapper);
+				if (typeof addEventListener === 'function') {
+					addEventListener('keyup', wrapper);
+				}
 
 				return function() {
-					window.removeEventListener('keyup', wrapper);
+					if (typeof removeEventListener === 'function') {
+						removeEventListener('keyup', wrapper);
+					}
 				};
 
 			}
