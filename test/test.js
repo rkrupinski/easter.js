@@ -1,4 +1,4 @@
-var	fixture = '<input id="input" type="text" name="foo">',
+var	fixture = '<input id="input" type="text" name="foo"><div id="div"></div>',
 	pattern = [65, 66, 67],
 	sequence,
 	callback = function() {};
@@ -54,7 +54,7 @@ describe('easter.js', function () {
 		});
 
 		runs(function () {
-			keyup(document.body, 67);
+			keyup(document.getElementById('div'), 67);
 		});
 
 		runs(function () {
@@ -73,6 +73,22 @@ describe('easter.js', function () {
 
 		runs(function () {
 			keyup(document.body, 67);
+		});
+
+		runs(function () {
+			expect(callback.calls.length).toEqual(2);
+		});
+
+		runs(function () {
+			keyup(document.body, 65);
+		});
+
+		runs(function () {
+			keyup(document.body, 66);
+		});
+
+		runs(function () {
+			keyup(document.getElementById('input'), 67);
 		});
 
 		runs(function () {

@@ -1,5 +1,6 @@
 easter.js
 =========
+[![Build Status](https://travis-ci.org/rkrupinski/easter.js.png?branch=master)](https://travis-ci.org/rkrupinski/easter.js)
 
 Easter eggs made easy.
 
