@@ -7,20 +7,38 @@ module.exports = function(grunt) {
 				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | MIT license | http://github.com/rkrupinski/easter.js */\n'
 			},
 			dist: {
-				src: '<%= pkg.name.split(\'.\').shift() %>.js',
+				src: '<%= pkg.name %>',
 				dest: '<%= pkg.name.split(\'.\').shift() %>.min.js'
 			}
 		},
 		jshint: {
-			dist: '<%= pkg.name.split(\'.\').shift() %>.js'
+			dist: '<%= pkg.name %>'
+		},
+		jasmine: {
+			dist: {
+				options: {
+					specs: 'test/*.js',
+					helpers: [
+						'test/helpers/*.js'
+					]
+				},
+				src: '<%= pkg.name %>'
+
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-jasmine');
+
+	grunt.registerTask('test', [
+		'jshint',
+		'jasmine'
+	]);
 
 	grunt.registerTask('default', [
-		'jshint',
+		'test',
 		'uglify'
 	]);
 
