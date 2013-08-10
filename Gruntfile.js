@@ -2,15 +2,6 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		uglify: {
-			options: {
-				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | MIT license | http://github.com/rkrupinski/easter.js */\n'
-			},
-			dist: {
-				src: '<%= pkg.name %>',
-				dest: '<%= pkg.name.split(\'.\').shift() %>.min.js'
-			}
-		},
 		jshint: {
 			dist: '<%= pkg.name %>'
 		},
@@ -23,14 +14,31 @@ module.exports = function(grunt) {
 					]
 				},
 				src: '<%= pkg.name %>'
-
 			}
-		}
+		},
+		strip_code: {
+			dist: {
+				src: '<%= pkg.name %>',
+				dest: 'tmp/<%= pkg.name %>'
+			}
+		},
+		uglify: {
+			options: {
+				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | MIT license | http://github.com/rkrupinski/easter.js */\n'
+			},
+			dist: {
+				src: 'tmp/<%= pkg.name %>',
+				dest: '<%= pkg.name.split(\'.\').shift() %>.min.js'
+			}
+		},
+		clean: ['tmp']
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
+	grunt.loadNpmTasks('grunt-strip-code');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.registerTask('test', [
 		'jshint',
@@ -39,7 +47,9 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', [
 		'test',
-		'uglify'
+		'strip_code',
+		'uglify',
+		'clean'
 	]);
 
 };

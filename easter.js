@@ -76,6 +76,16 @@
 		delay: 500
 	};
 
+
+	/* test-code */
+
+	f._private = {};
+
+	f._private.isValidTarget = isValidTarget;
+
+	/* end-test-code */
+
+
 	return f;
 	
 }));
