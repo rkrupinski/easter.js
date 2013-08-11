@@ -28,7 +28,7 @@
 			register: function(pattern, callback) {
 
 				var	sequence = [],
-					patternStr = pattern.join('_'),
+					patternStr = pattern.toString(),
 					timer;
 
 				function wrapper(e) {
@@ -39,7 +39,7 @@
 
 					sequence.push(e.keyCode);
 
-					if (sequence.join('_').indexOf(patternStr) !== -1) {
+					if (sequence.toString().indexOf(patternStr) !== -1) {
 						sequence.length = 0;
 						callback();
 					}
