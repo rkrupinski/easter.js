@@ -8,17 +8,6 @@ module.exports = function(grunt) {
 		jshint: {
 			all: ['Gruntfile.js', 'test/**/*.js', '<%= pkg.name %>']
 		},
-		jasmine: {
-			all: {
-				options: {
-					specs: 'test/*.js',
-					helpers: [
-						'test/helpers/*.js'
-					]
-				},
-				src: '<%= pkg.name %>'
-			}
-		},
 		strip_code: {
 			dist: {
 				src: '<%= pkg.name %>',
@@ -39,7 +28,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('test', [
 		'jshint',
-		'jasmine'
 	]);
 
 	grunt.registerTask('default', [
