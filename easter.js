@@ -1,6 +1,4 @@
 (function (root, factory) {
-	'use strict';
-
 
 	if (typeof define === 'function' && define.amd) {
 		define([], function () {
@@ -39,18 +37,18 @@
 
 					sequence.push(e.keyCode);
 
+					if (sequence.length > f.defaults.sequenceMax) {
+						sequence.shift();
+					}
+
 					if (sequence.toString().indexOf(patternStr) !== -1) {
 						sequence.length = 0;
 						callback();
 					}
 
-					if (sequence.length > f.defaults.sequenceMax) {
-						sequence.shift();
-					}
-
 					clearTimeout(timer);
 
-					timer = setTimeout(function() {
+					timer = setTimeout(function () {
 						sequence.length = 0;
 					}, f.defaults.delay);
 
@@ -60,7 +58,7 @@
 					addEventListener('keyup', wrapper);
 				}
 
-				return function() {
+				return function () {
 					if (typeof removeEventListener === 'function') {
 						removeEventListener('keyup', wrapper);
 					}

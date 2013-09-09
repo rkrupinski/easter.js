@@ -6,10 +6,10 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		jshint: {
-			dist: '<%= pkg.name %>'
+			all: ['Gruntfile.js', 'test/**/*.js', '<%= pkg.name %>']
 		},
 		jasmine: {
-			dist: {
+			all: {
 				options: {
 					specs: 'test/*.js',
 					helpers: [

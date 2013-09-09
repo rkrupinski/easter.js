@@ -1,17 +1,20 @@
-var	fixture = '<input id="input" type="text" name="foo"><div id="div"></div>',
-	pattern = [65, 66, 67],
-	callback = function() {};
-
-
 describe('easter.js', function () {
+	var	fixture = '<input id="input" type="text" name="foo"><div id="div"></div>',
+		pattern = [65, 66, 67],
+		sequenceMax = easter.defaults.sequenceMax,
+		delay = easter.defaults.delay;
 
 	beforeEach(function () {
 		document.body.innerHTML = fixture;
 	});
 
-	describe('private api', function () {
+	afterEach(function () {
+		easter.defaults.sequenceMax = sequenceMax;
+		easter.defaults.delay = delay;
+	});
 
-		it('checks keyup target', function () {
+	describe('private api', function () {
+		it('validates event target', function () {
 			var check = easter._private.isValidTarget;
 
 			expect(check(document.getElementById('input'))).toBe(false);
@@ -20,15 +23,11 @@ describe('easter.js', function () {
 	});
 
 	describe('public api', function () {
-
 		it('registers sequence', function () {
-			spyOn(window, 'callback');
+			var	callback = jasmine.createSpy(),
+				deregister = easter().register(pattern, callback);
 
-			var sequence = easter().register(pattern, callback);
-
-			runs(function () {
-				expect(callback.calls.length).toEqual(0);
-			});
+			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
 				keyup(document.body, 65);
@@ -82,24 +81,6 @@ describe('easter.js', function () {
 				keyup(document.body, 66);
 			});
 
-			waits(600);
-
-			runs(function () {
-				keyup(document.body, 67);
-			});
-
-			runs(function () {
-				expect(callback.calls.length).toEqual(2);
-			});
-
-			runs(function () {
-				keyup(document.body, 65);
-			});
-
-			runs(function () {
-				keyup(document.body, 66);
-			});
-
 			runs(function () {
 				keyup(document.getElementById('input'), 67);
 			});
@@ -108,9 +89,7 @@ describe('easter.js', function () {
 				expect(callback.calls.length).toEqual(2);
 			});
 
-			runs(function () {
-				sequence();
-			});
+			runs(deregister);
 
 			runs(function () {
 				keyup(document.body, 65);
@@ -127,18 +106,15 @@ describe('easter.js', function () {
 			runs(function () {
 				expect(callback.calls.length).toEqual(2);
 			});
-
 		});
 
 		it('registers multiple sequences', function () {
-			spyOn(window, 'callback');
+			var callback = jasmine.createSpy();
 
-			var	sequence1 = easter().register(pattern, callback),
-				sequence2 = easter().register(pattern.reverse(), callback);
+			easter().register(pattern, callback);
+			easter().register(pattern.slice().reverse(), callback);
 
-			runs(function () {
-				expect(callback.calls.length).toEqual(0);
-			});
+			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
 				keyup(document.body, 65);
@@ -163,9 +139,78 @@ describe('easter.js', function () {
 			runs(function () {
 				expect(callback.calls.length).toEqual(2);
 			});
-
 		});
 
-	});
+		it('fails for sequences that are too long', function () {
+			var callback = jasmine.createSpy();
 
+			easter.defaults.sequenceMax = pattern.length - 1;
+
+			easter().register(pattern, callback);
+			easter().register(pattern.slice(0, easter.defaults.sequenceMax), callback);
+
+			expect(callback.calls.length).toEqual(0);
+
+			runs(function () {
+				keyup(document.body, 65);
+			});
+
+			runs(function () {
+				keyup(document.body, 66);
+			});
+
+			runs(function () {
+				keyup(document.body, 67);
+			});
+
+			runs(function () {
+				expect(callback.calls.length).toEqual(1);
+			});
+		});
+
+		it('fails for sequences entered too slowly', function () {
+			var callback = jasmine.createSpy();
+
+			easter().register(pattern, callback);
+
+			expect(callback.calls.length).toEqual(0);
+
+			runs(function () {
+				keyup(document.body, 65);
+			});
+
+			runs(function () {
+				keyup(document.body, 66);
+			});
+
+			waits(600);
+
+			runs(function () {
+				keyup(document.body, 67);
+			});
+
+			runs(function () {
+				expect(callback.calls.length).toEqual(0);
+				easter.defaults.delay = 700;
+			});
+
+			runs(function () {
+				keyup(document.body, 65);
+			});
+
+			runs(function () {
+				keyup(document.body, 66);
+			});
+
+			waits(600);
+
+			runs(function () {
+				keyup(document.body, 67);
+			});
+
+			runs(function () {
+				expect(callback.calls.length).toEqual(1);
+			});
+		});
+	});
 });
