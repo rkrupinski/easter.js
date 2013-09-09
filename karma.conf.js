@@ -8,6 +8,6 @@ module.exports = function(config) {
 		],
 		reporters: 'dots',
 		autoWatch: true,
-		singleRun: false
+		singleRun: true
 	});
 };
