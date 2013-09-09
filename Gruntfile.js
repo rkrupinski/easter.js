@@ -8,6 +8,11 @@ module.exports = function(grunt) {
 		jshint: {
 			all: ['Gruntfile.js', 'test/**/*.js', '<%= pkg.name %>']
 		},
+		karma: {
+			dist: {
+				configFile: 'karma.conf.js'
+			}
+		},
 		strip_code: {
 			dist: {
 				src: '<%= pkg.name %>',
@@ -28,6 +33,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('test', [
 		'jshint',
+		'karma'
 	]);
 
 	grunt.registerTask('default', [
