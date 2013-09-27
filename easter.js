@@ -16,7 +16,8 @@
 
 	function isValidTarget(element) {
 		return	element.nodeName.toLowerCase() !== 'input' &&
-			element.nodeName.toLowerCase() !== 'textarea';
+				element.nodeName.toLowerCase() !== 'textarea' &&
+				!element.hasAttribute('contenteditable');
 	}
 
 	function f() {
