@@ -1,5 +1,9 @@
 describe('easter.js', function () {
-	var	fixture = '<input id="input" type="text" name="foo"><div id="div"></div>',
+	var	fixture = [
+			'<input id="input" type="text" name="foo">',
+			'<div id="div">foo</div>',
+			'<span id="span" contenteditable>foo</span>'
+		].join(''),
 		pattern = [65, 66, 67],
 		sequenceMax = easter.defaults.sequenceMax,
 		delay = easter.defaults.delay;
@@ -19,6 +23,7 @@ describe('easter.js', function () {
 
 			expect(check(document.getElementById('input'))).toBe(false);
 			expect(check(document.getElementById('div'))).toBe(true);
+			expect(check(document.getElementById('span'))).toBe(false);
 		});
 	});
 

@@ -7,7 +7,6 @@ module.exports = function(config) {
 			'test/**/*.js'
 		],
 		reporters: 'dots',
-		autoWatch: true,
 		singleRun: true
 	});
 };
