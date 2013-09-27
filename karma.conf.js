@@ -1,11 +1,7 @@
 module.exports = function(config) {
 	config.set({
 		frameworks: ['jasmine'],
-		browsers: [
-			'PhantomJS',
-			'Chrome',
-			'Firefox'
-		],
+		browsers: ['PhantomJS'],
 		files: [
 			'easter.js',
 			'test/**/*.js'
