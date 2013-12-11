@@ -55,14 +55,13 @@
 
 				}
 
-				if (typeof addEventListener === 'function') {
-					addEventListener('keyup', wrapper);
-				}
+				if (typeof window.addEventListener !== 'function') return;
+
+				addEventListener('keyup', wrapper);
 
 				return function () {
-					if (typeof removeEventListener === 'function') {
 						removeEventListener('keyup', wrapper);
-					}
+						wrapper = null;
 				};
 
 			}
