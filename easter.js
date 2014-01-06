@@ -63,10 +63,10 @@
 
 				}
 
-				addEventListener('keyup', wrapper);
+				addEventListener('keypress', wrapper);
 
 				return function () {
-						removeEventListener('keyup', wrapper);
+						removeEventListener('keypress', wrapper);
 						wrapper = null;
 				};
 

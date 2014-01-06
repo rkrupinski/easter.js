@@ -42,27 +42,15 @@ describe('easter.js', function () {
 			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
-				keyup(document.body, 97);
+				keypress(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 98);
+				keypress(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 99);
-			});
-
-			runs(function () {
-				expect(callback.calls.length).toEqual(1);
-			});
-
-			runs(function () {
-				keyup(document.body, 64);
-			});
-
-			runs(function () {
-				keyup(document.body, 64);
+				keypress(document.body, 99);
 			});
 
 			runs(function () {
@@ -70,15 +58,27 @@ describe('easter.js', function () {
 			});
 
 			runs(function () {
-				keyup(document.body, 97);
+				keypress(document.body, 64);
 			});
 
 			runs(function () {
-				keyup(document.body, 98);
+				keypress(document.body, 64);
 			});
 
 			runs(function () {
-				keyup(document.getElementById('div'), 99);
+				expect(callback.calls.length).toEqual(1);
+			});
+
+			runs(function () {
+				keypress(document.body, 97);
+			});
+
+			runs(function () {
+				keypress(document.body, 98);
+			});
+
+			runs(function () {
+				keypress(document.getElementById('div'), 99);
 			});
 
 			runs(function () {
@@ -86,15 +86,15 @@ describe('easter.js', function () {
 			});
 
 			runs(function () {
-				keyup(document.body, 97);
+				keypress(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 98);
+				keypress(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.getElementById('input'), 99);
+				keypress(document.getElementById('input'), 99);
 			});
 
 			runs(function () {
@@ -104,15 +104,15 @@ describe('easter.js', function () {
 			runs(deregister);
 
 			runs(function () {
-				keyup(document.body, 97);
+				keypress(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 98);
+				keypress(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 99);
+				keypress(document.body, 99);
 			});
 
 			runs(function () {
@@ -129,23 +129,23 @@ describe('easter.js', function () {
 			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
-				keyup(document.body, 97);
+				keypress(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 98);
+				keypress(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 99);
+				keypress(document.body, 99);
 			});
 
 			runs(function () {
-				keyup(document.body, 98);
+				keypress(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 97);
+				keypress(document.body, 97);
 			});
 
 			runs(function () {
@@ -164,15 +164,15 @@ describe('easter.js', function () {
 			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
-				keyup(document.body, 97);
+				keypress(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 98);
+				keypress(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 99);
+				keypress(document.body, 99);
 			});
 
 			runs(function () {
@@ -188,17 +188,17 @@ describe('easter.js', function () {
 			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
-				keyup(document.body, 97);
+				keypress(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 98);
+				keypress(document.body, 98);
 			});
 
 			waits(600);
 
 			runs(function () {
-				keyup(document.body, 99);
+				keypress(document.body, 99);
 			});
 
 			runs(function () {
@@ -207,17 +207,17 @@ describe('easter.js', function () {
 			});
 
 			runs(function () {
-				keyup(document.body, 97);
+				keypress(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 98);
+				keypress(document.body, 98);
 			});
 
 			waits(600);
 
 			runs(function () {
-				keyup(document.body, 99);
+				keypress(document.body, 99);
 			});
 
 			runs(function () {
