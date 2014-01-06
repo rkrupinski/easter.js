@@ -13,26 +13,34 @@
 }(this, function () {
 	'use strict';
 
-
-	function isValidTarget(element) {
-		return	element.nodeName.toLowerCase() !== 'input' &&
-				element.nodeName.toLowerCase() !== 'textarea' &&
-				!element.hasAttribute('contenteditable');
-	}
+	var utils = {
+		isValidTarget: function (element) {
+			return element.nodeName.toLowerCase() !== 'input' &&
+					element.nodeName.toLowerCase() !== 'textarea' &&
+					!element.hasAttribute('contenteditable');
+		},
+		toKeyCodes: function (arr) {
+			return arr.map(function (item) {
+				return typeof item === 'string' ? item.charCodeAt(0) :
+						item;
+			});
+		}
+	};
 
 	function f() {
 
 		return {
 
 			register: function(pattern, callback) {
+				if (typeof window.addEventListener !== 'function') return;
 
 				var	sequence = [],
-					patternStr = pattern.toString(),
-					timer;
+						patternStr = utils.toKeyCodes(pattern).toString(),
+						timer;
 
 				function wrapper(e) {
 
-					if (!isValidTarget(e.target)) {
+					if (!utils.isValidTarget(e.target)) {
 						return;
 					}
 
@@ -55,8 +63,6 @@
 
 				}
 
-				if (typeof window.addEventListener !== 'function') return;
-
 				addEventListener('keyup', wrapper);
 
 				return function () {
@@ -77,9 +83,7 @@
 
 	/* test-code */
 
-	f._private = {};
-
-	f._private.isValidTarget = isValidTarget;
+	f._utils = utils;
 
 	/* end-test-code */
 

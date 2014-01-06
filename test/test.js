@@ -4,7 +4,7 @@ describe('easter.js', function () {
 			'<div id="div">foo</div>',
 			'<span id="span" contenteditable>foo</span>'
 		].join(''),
-		pattern = [65, 66, 67],
+		pattern = [97, 98, 'c'],
 		sequenceMax = easter.defaults.sequenceMax,
 		delay = easter.defaults.delay;
 
@@ -19,11 +19,18 @@ describe('easter.js', function () {
 
 	describe('private api', function () {
 		it('validates event target', function () {
-			var check = easter._private.isValidTarget;
+			var check = easter._utils.isValidTarget;
 
 			expect(check(document.getElementById('input'))).toBe(false);
 			expect(check(document.getElementById('div'))).toBe(true);
 			expect(check(document.getElementById('span'))).toBe(false);
+		});
+
+		it('converts strings in pattern to key codes', function () {
+			var convert = easter._utils.toKeyCodes;
+
+			expect(convert([1, 2, 3])).toEqual([1, 2, 3]);
+			expect(convert([1, 'a', 'c'])).toEqual([1, 97, 99]);
 		});
 	});
 
@@ -35,15 +42,15 @@ describe('easter.js', function () {
 			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
-				keyup(document.body, 65);
+				keyup(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 66);
+				keyup(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 67);
+				keyup(document.body, 99);
 			});
 
 			runs(function () {
@@ -63,15 +70,15 @@ describe('easter.js', function () {
 			});
 
 			runs(function () {
-				keyup(document.body, 65);
+				keyup(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 66);
+				keyup(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.getElementById('div'), 67);
+				keyup(document.getElementById('div'), 99);
 			});
 
 			runs(function () {
@@ -79,15 +86,15 @@ describe('easter.js', function () {
 			});
 
 			runs(function () {
-				keyup(document.body, 65);
+				keyup(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 66);
+				keyup(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.getElementById('input'), 67);
+				keyup(document.getElementById('input'), 99);
 			});
 
 			runs(function () {
@@ -97,15 +104,15 @@ describe('easter.js', function () {
 			runs(deregister);
 
 			runs(function () {
-				keyup(document.body, 65);
+				keyup(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 66);
+				keyup(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 67);
+				keyup(document.body, 99);
 			});
 
 			runs(function () {
@@ -122,23 +129,23 @@ describe('easter.js', function () {
 			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
-				keyup(document.body, 65);
+				keyup(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 66);
+				keyup(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 67);
+				keyup(document.body, 99);
 			});
 
 			runs(function () {
-				keyup(document.body, 66);
+				keyup(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 65);
+				keyup(document.body, 97);
 			});
 
 			runs(function () {
@@ -157,15 +164,15 @@ describe('easter.js', function () {
 			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
-				keyup(document.body, 65);
+				keyup(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 66);
+				keyup(document.body, 98);
 			});
 
 			runs(function () {
-				keyup(document.body, 67);
+				keyup(document.body, 99);
 			});
 
 			runs(function () {
@@ -181,17 +188,17 @@ describe('easter.js', function () {
 			expect(callback.calls.length).toEqual(0);
 
 			runs(function () {
-				keyup(document.body, 65);
+				keyup(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 66);
+				keyup(document.body, 98);
 			});
 
 			waits(600);
 
 			runs(function () {
-				keyup(document.body, 67);
+				keyup(document.body, 99);
 			});
 
 			runs(function () {
@@ -200,17 +207,17 @@ describe('easter.js', function () {
 			});
 
 			runs(function () {
-				keyup(document.body, 65);
+				keyup(document.body, 97);
 			});
 
 			runs(function () {
-				keyup(document.body, 66);
+				keyup(document.body, 98);
 			});
 
 			waits(600);
 
 			runs(function () {
-				keyup(document.body, 67);
+				keyup(document.body, 99);
 			});
 
 			runs(function () {
