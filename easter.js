@@ -13,34 +13,26 @@
 }(this, function () {
 	'use strict';
 
-	var utils = {
-		isValidTarget: function (element) {
-			return element.nodeName.toLowerCase() !== 'input' &&
-					element.nodeName.toLowerCase() !== 'textarea' &&
-					!element.hasAttribute('contenteditable');
-		},
-		toKeyCodes: function (arr) {
-			return arr.map(function (item) {
-				return typeof item === 'string' ? item.charCodeAt(0) :
-						item;
-			});
-		}
-	};
+
+	function isValidTarget(element) {
+		return	element.nodeName.toLowerCase() !== 'input' &&
+				element.nodeName.toLowerCase() !== 'textarea' &&
+				!element.hasAttribute('contenteditable');
+	}
 
 	function f() {
 
 		return {
 
 			register: function(pattern, callback) {
-				if (typeof window.addEventListener !== 'function') return;
 
 				var	sequence = [],
-						patternStr = utils.toKeyCodes(pattern).toString(),
-						timer;
+					patternStr = pattern.toString(),
+					timer;
 
 				function wrapper(e) {
 
-					if (!utils.isValidTarget(e.target)) {
+					if (!isValidTarget(e.target)) {
 						return;
 					}
 
@@ -63,10 +55,12 @@
 
 				}
 
-				addEventListener('keypress', wrapper);
+				if (typeof window.addEventListener !== 'function') return;
+
+				addEventListener('keyup', wrapper);
 
 				return function () {
-						removeEventListener('keypress', wrapper);
+						removeEventListener('keyup', wrapper);
 						wrapper = null;
 				};
 
@@ -83,7 +77,9 @@
 
 	/* test-code */
 
-	f._utils = utils;
+	f._private = {};
+
+	f._private.isValidTarget = isValidTarget;
 
 	/* end-test-code */
 

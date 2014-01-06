@@ -1,7 +1,7 @@
-function keypress(el, code) {
+function keyup(el, code) {
 	var ev = document.createEvent('Event');
 
-	ev.initEvent('keypress', true, true);
+	ev.initEvent('keyup', true, true);
 	ev.keyCode = code;
 
 	el.dispatchEvent(ev);

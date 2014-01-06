@@ -8,12 +8,11 @@ Ever wanted to make the KONAMI code work on your website?
 
 ```js
 var konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-// It also supports strings, e.g., ['a', 'b', 'c'].
 
 var deregister = easter().register(konamiCode, function() {
-	// Do fancy stuff.
+	doSomeFancyStuff();
 
-	// Remove listener.
+	// do stuff once
 	deregister();
 });
 ```
