@@ -1,5 +1,4 @@
 (function (root, factory) {
-
 	if (typeof define === 'function' && define.amd) {
 		define([], function () {
 			return factory();
@@ -9,26 +8,26 @@
 	} else {
 		root.easter = factory();
 	}
-
 }(this, function () {
 	'use strict';
 
-
 	function isValidTarget(element) {
-		return	element.nodeName.toLowerCase() !== 'input' &&
+		return element.nodeName.toLowerCase() !== 'input' &&
 				element.nodeName.toLowerCase() !== 'textarea' &&
 				!element.hasAttribute('contenteditable');
 	}
 
 	function f() {
-
 		return {
-
 			register: function(pattern, callback) {
+				var sequence = [],
+						patternStr = pattern.toString(),
+						timer;
 
-				var	sequence = [],
-					patternStr = pattern.toString(),
-					timer;
+				if (typeof window.addEventListener !== 'function') {
+					return;
+				}
+
 
 				function wrapper(e) {
 
@@ -55,25 +54,21 @@
 
 				}
 
-				if (typeof window.addEventListener !== 'function') return;
-
-				addEventListener('keyup', wrapper);
+				window.addEventListener('keyup', wrapper);
 
 				return function () {
-						removeEventListener('keyup', wrapper);
-						wrapper = null;
+					window.removeEventListener('keyup', wrapper);
+					wrapper = null;
 				};
 
 			}
 		};
-
 	}
 
 	f.defaults = {
 		sequenceMax: 20,
 		delay: 500
 	};
-
 
 	/* test-code */
 
@@ -83,7 +78,5 @@
 
 	/* end-test-code */
 
-
 	return f;
-	
 }));
