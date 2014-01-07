@@ -11,11 +11,13 @@
 }(this, function () {
 	'use strict';
 
-	function isValidTarget(element) {
-		return element.nodeName.toLowerCase() !== 'input' &&
-				element.nodeName.toLowerCase() !== 'textarea' &&
-				!element.hasAttribute('contenteditable');
-	}
+	var utils = {
+		isValidTarget: function (element) {
+			return element.nodeName.toLowerCase() !== 'input' &&
+					element.nodeName.toLowerCase() !== 'textarea' &&
+					!element.hasAttribute('contenteditable');
+		}
+	};
 
 	function f() {
 		return {
@@ -28,10 +30,9 @@
 					return;
 				}
 
-
 				function wrapper(e) {
 
-					if (!isValidTarget(e.target)) {
+					if (!utils.isValidTarget(e.target)) {
 						return;
 					}
 
@@ -72,9 +73,7 @@
 
 	/* test-code */
 
-	f._private = {};
-
-	f._private.isValidTarget = isValidTarget;
+	f._utils = utils;
 
 	/* end-test-code */
 

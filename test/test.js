@@ -19,7 +19,7 @@ describe('easter.js', function () {
 
 	describe('private api', function () {
 		it('validates event target', function () {
-			var check = easter._private.isValidTarget;
+			var check = easter._utils.isValidTarget;
 
 			expect(check(document.getElementById('input'))).toBe(false);
 			expect(check(document.getElementById('div'))).toBe(true);
