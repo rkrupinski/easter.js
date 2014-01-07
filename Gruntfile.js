@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+	'use strict';
 
 	require('load-grunt-tasks')(grunt);
 	require('time-grunt')(grunt);
@@ -6,7 +7,13 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		jshint: {
-			all: ['Gruntfile.js', 'test/**/*.js', '<%= pkg.name %>']
+			options: {
+				jshintrc: '.jshintrc'
+			},
+			all: [
+				'Gruntfile.js',
+				'easter.js'
+			]
 		},
 		karma: {
 			dist: {
