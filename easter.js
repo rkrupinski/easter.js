@@ -58,7 +58,8 @@
 						patternStr = pattern.map(utils.normalizeInput).toString(),
 						timer;
 
-				if (typeof window.addEventListener !== 'function') {
+				if (typeof window.addEventListener !== 'function' ||
+						!pattern.length) {
 					return;
 				}
 
