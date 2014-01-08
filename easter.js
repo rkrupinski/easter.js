@@ -28,7 +28,7 @@
 					element.nodeName.toLowerCase() !== 'textarea' &&
 					!element.hasAttribute('contenteditable');
 		},
-		normalizeInput: function (input) {
+		normalize: function (input) {
 			var output = input,
 					charCode;
 
@@ -52,6 +52,10 @@
 			}
 
 			return output;
+		},
+		ensureArray: function (pattern) {
+			return typeof pattern === 'string' ? pattern.split(/\s+/) :
+					pattern;
 		}
 	};
 
@@ -59,7 +63,7 @@
 		return {
 			register: function(pattern, callback) {
 				var sequence = [],
-						patternStr = pattern.map(utils.normalizeInput).toString(),
+						patternStr,
 						timer;
 
 				if (typeof window.addEventListener !== 'function' ||
@@ -91,6 +95,9 @@
 					}, f.defaults.delay);
 
 				}
+
+				patternStr = utils.ensureArray(pattern).map(utils.normalize)
+						.toString();
 
 				window.addEventListener('keyup', wrapper);
 
