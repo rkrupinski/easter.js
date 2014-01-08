@@ -8,20 +8,26 @@ Easter eggs made easy.
 Ever wanted to make the KONAMI code work on your website?
 
 ```js
-var konamiCode = ['up', 'up', 'down', 'down', 'left', 'right',
-		'left', 'right', 'b', 'a'];
-// or [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]
+var konamiCode = 'up up down down left right left right b a';
 
 var deregister = easter().register(konamiCode, function() {
-	// do some fancy stuff
-
-	// deregister sequence
-	deregister();
+	// do fancy stuff
 });
 ```
 
 Usage
 -----
+Key sequence can be expressed in different formats:
+- `['a', 'b', 'c']`\*
+- `[65, 66, 67]`
+- `['a', 66, 'c']`\*
+- `'a b c'`\*
+
+\* When using strings, you're limited to:
+- `[a-z]`, `[0-9]`
+- `'left'`, `'right'`, `'up'`, `'down'`, `'shift'`, `'ctrl'`, `'alt'`, `'space'`
+
+A sequence can be deregistered easily. Just use the function returned by `register()` call.
 
 Installation
 ------------
