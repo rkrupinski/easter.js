@@ -1,22 +1,27 @@
 easter.js
 =========
+Easter eggs made easy.
+
 [![Build Status](https://travis-ci.org/rkrupinski/easter.js.png?branch=master)](https://travis-ci.org/rkrupinski/easter.js)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-
-Easter eggs made easy.
 
 Ever wanted to make the KONAMI code work on your website?
 
 ```js
-var konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+var konamiCode = ['up', 'up', 'down', 'down', 'left', 'right',
+		'left', 'right', 'b', 'a'];
+// or [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]
 
 var deregister = easter().register(konamiCode, function() {
-	doSomeFancyStuff();
+	// do some fancy stuff
 
-	// do stuff once
+	// deregister sequence
 	deregister();
 });
 ```
+
+Usage
+-----
 
 Installation
 ------------
