@@ -16,14 +16,14 @@ module.exports = function(grunt) {
 			]
 		},
 		karma: {
-			dist: {
+			unit: {
 				configFile: 'karma.conf.js'
 			}
 		},
 		strip_code: {
 			dist: {
-				src: '<%= pkg.name %>',
-				dest: 'tmp/<%= pkg.name %>'
+				src: 'easter.js',
+				dest: '.tmp/easter.js'
 			}
 		},
 		uglify: {
@@ -31,11 +31,11 @@ module.exports = function(grunt) {
 				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | MIT license | http://github.com/rkrupinski/easter.js */\n'
 			},
 			dist: {
-				src: 'tmp/<%= pkg.name %>',
-				dest: '<%= pkg.name.split(\'.\').shift() %>.min.js'
+				src: '.tmp/easter.js',
+				dest: 'easter.min.js'
 			}
 		},
-		clean: ['tmp']
+		clean: ['.tmp']
 	});
 
 	grunt.registerTask('test', [
