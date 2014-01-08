@@ -15,7 +15,11 @@
 		'left': 37,
 		'right': 39,
 		'up': 38,
-		'down': 40
+		'down': 40,
+		'shift': 16,
+		'ctrl': 17,
+		'alt': 18,
+		'space': 32
 	};
 
 	var utils = {
