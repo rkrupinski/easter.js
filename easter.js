@@ -39,7 +39,7 @@
 					case (dict.hasOwnProperty(input)):
 						output = dict[input];
 						break;
-					case (charCode > 64 && charCode < 123):
+					case (charCode > 96 && charCode < 123):
 						output = charCode - 32;
 						break;
 					case (charCode > 47 && charCode < 58):
