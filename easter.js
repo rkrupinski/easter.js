@@ -117,6 +117,7 @@
 
 	/* test-code */
 
+	f._dict = dict;
 	f._utils = utils;
 
 	/* end-test-code */
