@@ -38,6 +38,10 @@ Supported sequence formats:
 
 Sequence can be deregistered by calling function returned by `register()` call.
 
+Default configuration can be altered as it is exposed via `easter.defaults`. Available configuration options are:
+- `sequenceMax`: maximum length of registered sequence (default: `20`)
+- `delay`: maximum delay between keystrokes in ms (default: `500`)
+
 Using standalone:
 ```js
 easter().register(sequence, callback);
