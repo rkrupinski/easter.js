@@ -1,8 +1,7 @@
-function keyup(el, code) {
+function keyup(code) {
 	var ev = document.createEvent('Event');
 
 	ev.initEvent('keyup', true, true);
 	ev.keyCode = code;
-
-	el.dispatchEvent(ev);
+	document.body.firstChild.dispatchEvent(ev);
 }
