@@ -62,12 +62,16 @@
 	function f() {
 		return {
 			register: function(pattern, callback) {
-				var sequence = [],
-						patternStr,
+				var patternArr = utils.ensureArray(pattern).map(utils.normalize),
+						patternStr = patternArr.toString(),
+						sequence = [],
 						timer;
 
-				if (typeof window.addEventListener !== 'function' ||
-						!pattern.length) {
+				if (typeof window.addEventListener !== 'function') {
+					return;
+				}
+
+				if (!pattern.length || patternArr.length > f.defaults.sequenceMax) {
 					return;
 				}
 
@@ -95,9 +99,6 @@
 					}, f.defaults.delay);
 
 				}
-
-				patternStr = utils.ensureArray(pattern).map(utils.normalize)
-						.toString();
 
 				window.addEventListener('keyup', wrapper);
 
