@@ -190,13 +190,13 @@ describe('easter.js', function () {
 				keyup(66);
 				keyup(67);
 
-				expect(spy.calls.length).toEqual(1);
+				expect(spy.calls.count()).toEqual(1);
 
 				keyup(65);
 				keyup(66);
 				keyup(67);
 
-				expect(spy.calls.length).toEqual(2);
+				expect(spy.calls.count()).toEqual(2);
 			});
 
 			it('should deregister a sequence', function () {
@@ -211,7 +211,7 @@ describe('easter.js', function () {
 				keyup(66);
 				keyup(67);
 
-				expect(spy.calls.length).toEqual(1);
+				expect(spy.calls.count()).toEqual(1);
 
 				deregister();
 
@@ -219,7 +219,7 @@ describe('easter.js', function () {
 				keyup(66);
 				keyup(67);
 
-				expect(spy.calls.length).toEqual(1);
+				expect(spy.calls.count()).toEqual(1);
 			});
 
 			it('should register any number of sequences', function () {
@@ -301,11 +301,12 @@ describe('easter.js', function () {
 				var delay = easter.defaults.delay;
 
 				beforeEach(function () {
-					jasmine.Clock.useMock();
+					jasmine.clock().install()
 				});
 
 				afterEach(function () {
 					easter.defaults.delay = delay;
+					jasmine.clock().uninstall();
 				});
 
 				it('should interrupt the sequence if delay between keystrokes is too long',
@@ -319,7 +320,7 @@ describe('easter.js', function () {
 
 					keyup(65);
 					keyup(66);
-					jasmine.Clock.tick(350);
+					jasmine.clock().tick(350);
 					keyup(67);
 
 					expect(spy).not.toHaveBeenCalled();
