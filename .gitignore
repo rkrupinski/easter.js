@@ -1,6 +1,5 @@
 .DS_Store
 .tmp
-dist
 coverage
 node_modules
 typings
