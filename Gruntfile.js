@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	'use strict';
 
 	require('load-grunt-tasks')(grunt);
@@ -6,15 +6,6 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		jshint: {
-			options: {
-				jshintrc: '.jshintrc'
-			},
-			all: [
-				'Gruntfile.js',
-				'easter.js'
-			]
-		},
 		karma: {
 			unit: {
 				configFile: 'karma.conf.js'
@@ -22,7 +13,20 @@ module.exports = function(grunt) {
 		},
 		strip_code: {
 			dist: {
-				src: 'easter.js',
+				src: 'src/easter.ts',
+				dest: '.tmp/easter.ts'
+			}
+		},
+		typescript: {
+			options: {
+				target: 'ES5'
+			},
+			dist: {
+				src: ['.tmp/easter.ts'],
+				dest: '.tmp/easter.js'
+			},
+			test: {
+				src: ['src/easter.ts'],
 				dest: '.tmp/easter.js'
 			}
 		},
@@ -32,22 +36,37 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				src: '.tmp/easter.js',
-				dest: 'easter.min.js'
+				dest: 'dist/easter.js'
 			}
 		},
-		clean: ['.tmp']
+		umd: {
+			dist: {
+				options: {
+					src: '.tmp/easter.js',
+					dest: '.tmp/easter.js',
+					globalAlias: 'easter',
+					objectToExport: 'factory'
+				}
+			}
+		},
+		clean: {
+			tmp: ['.tmp', 'dist']
+		}
 	});
 
 	grunt.registerTask('test', [
-		'jshint',
+		'clean',
+		'typescript:test',
+		'umd',
 		'karma'
 	]);
 
 	grunt.registerTask('default', [
-		'test',
+		'clean',
 		'strip_code',
-		'uglify',
-		'clean'
+		'typescript:dist',
+		'umd',
+		'uglify'
 	]);
 
 };

@@ -1,7 +1,7 @@
 {
   "name": "easter.js",
   "version": "0.0.5",
-  "main": "easter.min.js",
+  "main": "dist/easter.js",
   "ignore": [
     "node_modules"
   ]

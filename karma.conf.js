@@ -7,7 +7,7 @@ module.exports = function(config) {
 			'PhantomJS'
 		],
 		files: [
-			'easter.js',
+			'.tmp/easter.js',
 			'test/**/*.js'
 		],
 		reporters: [
@@ -15,7 +15,7 @@ module.exports = function(config) {
 			'coverage'
 		],
 		preprocessors: {
-			'easter.js': ['coverage']
+			'.tmp/easter.js': ['coverage']
 		},
 		singleRun: true
 	});

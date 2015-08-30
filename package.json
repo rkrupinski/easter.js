@@ -2,7 +2,7 @@
   "name": "easter.js",
   "version": "0.0.5",
   "description": "Easter eggs made easy.",
-  "main": "easter.min.js",
+  "main": "dist/easter.js",
   "scripts": {
     "test": "grunt test"
   },
@@ -15,10 +15,11 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-karma": "^0.12.0",
     "grunt-strip-code": "^0.1.2",
+    "grunt-typescript": "^0.7.0",
+    "grunt-umd": "^2.3.3",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.9",
     "karma-coverage": "^0.5.0",
