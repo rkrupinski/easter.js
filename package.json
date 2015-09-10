@@ -1,6 +1,6 @@
 {
   "name": "easter.js",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Easter eggs made easy.",
   "main": "dist/easter.js",
   "scripts": {
